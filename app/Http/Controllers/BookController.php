@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBookRequest;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class BookController extends Controller
@@ -19,7 +20,7 @@ class BookController extends Controller
     {
         $this->authorize('viewAny', $book);
 
-        $books = Book::orderBy('created_at', 'desc')->paginate(12);;
+        $books = Book::orderBy('created_at', 'desc')->paginate(12);
 
         return view('books.list', compact('books'));
     }
@@ -38,19 +39,29 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(StoreBookRequest $request)
     {
+        $user = Auth::user();
+        $book = $user->books()->create([
+            'user_id' => Auth::id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+        ]);
 
-     $imagePath= $request->images;
-  dd($imagePath);
-//        Book::create([
-//            'title'=>$request->title,
-//            'description'=>$request->description,
-//            'price'=>$request->price,
-//            'image'=> $imagePath
-//        ])
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $path = $image->storePublicly('images', 'public');
+                $book->images()->create([
+                    'file_path' => $path
+                ]);
+            }
+        }
+
+        return redirect('/books')->with('message', 'Created new book successfully');
+
     }
 
     /**

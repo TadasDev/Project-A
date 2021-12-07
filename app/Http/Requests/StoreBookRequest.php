@@ -27,7 +27,8 @@ class StoreBookRequest extends FormRequest
             'title'=>['required','max:55','string'],
             'description'=>['required','max:255','string'],
             'price'=>['required','numeric','max:255','min:1',],
-            'images'=>['required','mimes:jpeg,png,gif','max:2048']
+            'images.*'=>['required','mimes:jpeg,png,gif','max:2048'],
+            'images'=>['max:6'],
         ];
     }
 }

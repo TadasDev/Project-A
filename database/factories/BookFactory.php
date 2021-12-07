@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use http\Client\Curl\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookFactory extends Factory
