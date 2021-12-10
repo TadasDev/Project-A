@@ -4,25 +4,31 @@
             <h2 class=" font-semibold text-xl text-gray-800 leading-tight w-1/12 flex items-center">
                 {{ __('Books ') }}
             </h2>
-            <div class="flex justify-end py-4 w-11/12">
-                <x-input id="searchbox" class="block mt-1 w-1/4 border-2 px-4 " type="input" name="searchbox"
-                         placeholder="Search"/>
-                <x-button type="submit " class="block mt-1 w-1/12 border-2 px-4 p">Search</x-button>
-            </div>
         </div>
     </x-slot>
     <div class="bg-white">
 
         <div class="max-w-2xl mx-auto sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8">
 
-            <a href="{{ route('books.create') }}">
-                <button
-                    style="margin-bottom: 10px"
-                    type="button"
-                        class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded focus:outline-none focus:shadow-outline">
-                    Add book
-                </button>
-            </a>
+
+            <div class="flex justify-evenly py-4 w-full h-full">
+                <a href="{{ route('books.create') }}">
+                    <button
+                        type="button"
+                        class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                        Add new book
+                    </button>
+
+                </a>
+                <div class="flex justify-end w-11/12">
+                    <x-input id="searchbox" class="block mt-1 w-1/4 border-2 px-4 " type="input" name="searchbox"
+                             placeholder="Search"/>
+                    <x-button type="submit " class="block mt-1 w-1/12 border-2 px-4 ">Search</x-button>
+
+                </div>
+
+            </div>
+
             <x-success-message/>
 
             <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4">

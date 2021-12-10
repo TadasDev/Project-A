@@ -28,7 +28,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="max-w-7xl mx-auto py-2 px-2 sm:px-6 lg:px-8 ">
                 {{ $slot }}
             </main>
         </div>

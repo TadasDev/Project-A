@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use PhpParser\Node\Stmt\Return_;
 
 class BookController extends Controller
 {
@@ -68,11 +69,13 @@ class BookController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function show($id)
+    public function show($id): View
     {
-        dd($id);
+        $book = Book::find($id);
+
+        return view('books.single', compact('book'));
     }
 
     /**
