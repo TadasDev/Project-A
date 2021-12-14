@@ -20,7 +20,6 @@
                                 <th class="text-left p-3 px-5">Created at</th>
                                 <th class="text-left p-3 px-5">Updated at</th>
                                 <th class="text-left p-3 px-5">Role</th>
-
                             </tr>
                             @foreach($users as $user)
                                 <tr class="border-b hover:bg-orange-100 bg-gray-100">
@@ -32,24 +31,23 @@
                                     <td class="p-3 px-5"> {{$user->is_admin ? 'Admin':'User'}}</td>
                                     <td class="p-3 px-5 flex justify-end">
                                         @can('update',$user)
-                                        <a href="{{ route('users.edit',['id'=> $user->id]) }}">
-                                            <button type="button"
-                                                    class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded focus:outline-none focus:shadow-outline">
-                                                Edit
-                                            </button>
-                                        </a>
+                                            <a href="{{ route('users.edit',['id'=> $user->id]) }}">
+                                                <button type="button"
+                                                        class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded focus:outline-none focus:shadow-outline">
+                                                    Edit
+                                                </button>
+                                            </a>
                                         @endcan
                                         @can('delete',$user)
-                                        <form method="POST" action="{{route('users.destroy',['id'=> $user->id])}}">
-                                            @csrf
-
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                    class="text-sm bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                                Delete
-                                            </button>
-                                        </form>
-                                            @endcan
+                                            <form method="POST" action="{{route('users.destroy',['id'=> $user->id])}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                        class="text-sm bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
                                     @endforeach
                                 </tr>
