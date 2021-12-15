@@ -26,11 +26,13 @@ Route::get('/dashboard', function () {
 //Auth routes
 Route::middleware('auth')->group(function () {
     Route::get('/users/list', [RegisteredUserController::class, 'showUsers'])->name('users.list');
-    Route::get('/user/{id}/edit', [ProfileController::class, 'edit'])->name('users.edit');
-    Route::post('/user/{id}/edit', [ProfileController::class, 'update'])->name('users.update');
-    Route::delete('/user/{id}', [ProfileController::class, 'destroy'])->name('users.destroy');
+    Route::get('/users/{id}/edit', [ProfileController::class, 'edit'])->name('users.edit');
+    Route::post('/users/{id}/edit', [ProfileController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [ProfileController::class, 'destroy'])->name('users.destroy');
 //    //Books routes
     Route::resource('books', BookController::class);
+    //Sorted
+    Route::get('/sort', [BookController::class,'sortByPriceRange'])->name('books.sortByPriceRange');
 
 });
 

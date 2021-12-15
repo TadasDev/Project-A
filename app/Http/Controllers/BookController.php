@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Models\Book;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use PhpParser\Node\Stmt\Return_;
 
 class BookController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -110,5 +109,12 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sortByPriceRange(Request $request)
+    {
+        $books = Book::whereBetween('price', [$request->price_from, $request->price_to])->paginate(12);
+
+        return view('books.list', compact('books'));
     }
 }

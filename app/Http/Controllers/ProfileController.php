@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateRequest;
+use App\Models\Book;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -43,4 +45,5 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('message', 'User Deleted!!');
     }
+
 }
