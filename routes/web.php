@@ -31,22 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{id}', [ProfileController::class, 'destroy'])->name('users.destroy');
 //    //Books routes
     Route::resource('books', BookController::class);
-    //Sorted
-    Route::get('/sort', [BookController::class,'sortByPriceRange'])->name('books.sortByPriceRange');
+    //Sort routes
+    Route::get('/sort', [BookController::class,'sortBy'])->name('books.sortBy');
 
 });
-
-
-//Route::get('/users/list', [RegisteredUserController::class, 'showUsers']
-//)->middleware(['auth'])->name('users.list');
-
-//Route::get('/user/{id}/edit', [ProfileController::class, 'edit']
-//)->middleware(['auth'])->name('users.edit');
-//
-//Route::post('/user/{id}/edit', [ProfileController::class, 'update']
-//)->middleware(['auth'])->name('users.update');
-//
-//Route::delete('/user/{id}', [ProfileController::class, 'destroy']
-//)->middleware(['auth'])->name('users.destroy');
-
 require __DIR__ . '/auth.php';

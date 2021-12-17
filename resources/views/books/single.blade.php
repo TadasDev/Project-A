@@ -10,21 +10,21 @@
                     <x-validation-errors class="mb-4" :errors="$errors"/>
                     <x-success-message/>
 
-                    <div class="flex">
+                    <div class="flex w-full h-full justify-between">
+                        <div class="w-3/4 h-full"    >
                         @if($book->images()->count()>0)
                             <img src="{{ asset('storage/' . $book->images()->first()->file_path) }}"
-                                 style="height: 800px; width: 800px"
                                  alt=" Post image "
-                                 class="w-full h-full object-center object-cover group-hover:opacity-75"/>
-
+                                 class=" w-1/2 h-full object-center object-cover group-hover:opacity-75"/>
                         @else
                             <img
-                                style="height: 292px; width: 292px"
+
                                 src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
                                 alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                                class=" object-center object-cover group-hover:opacity-75">
+                                class=" text-center w-1/2 object-center object-cover group-hover:opacity-75">
 
                         @endif
+                            </div>
                         <div class="flex-col w-full h-full text-center">
                             <div class="p-6 text-xl">
                                 Book title: {{$book->title}}
@@ -35,7 +35,6 @@
                             <div class="p-6 text-xl">
                                 Description: {{$book->description}}
                             </div>
-
                         </div>
 
                     </div>

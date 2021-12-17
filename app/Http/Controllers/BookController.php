@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SortRequest;
 use App\Http\Requests\StoreBookRequest;
 use App\Models\Book;
+use App\Services\SortingManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class BookController extends Controller
 {
+    private $sortingManager;
+
+    public function __construct(
+        SortingManager $sortingManager
+    )
+    {
+        $this->sortingManager = $sortingManager;
+    }
 
     /**
      * Display a listing of the resource.
@@ -53,6 +63,7 @@ class BookController extends Controller
         if ($request->hasFile('images')) {
             $images = $request->file('images');
             foreach ($images as $image) {
+
                 $path = $image->storePublicly('images', 'public');
                 $book->images()->create([
                     'file_path' => $path
@@ -111,10 +122,12 @@ class BookController extends Controller
         //
     }
 
-    public function sortByPriceRange(Request $request)
+    public function sortBy(SortRequest $request)
     {
-        $books = Book::whereBetween('price', [$request->price_from, $request->price_to])->paginate(12);
+        $books = $this->sortingManager->sort($request);
 
         return view('books.list', compact('books'));
+
     }
+
 }
