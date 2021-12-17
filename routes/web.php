@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookReviewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,10 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}/edit', [ProfileController::class, 'edit'])->name('users.edit');
     Route::post('/users/{id}/edit', [ProfileController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [ProfileController::class, 'destroy'])->name('users.destroy');
-//    //Books routes
+   //Books routes
     Route::resource('books', BookController::class);
     //Sort routes
     Route::get('/sort', [BookController::class,'sortBy'])->name('books.sortBy');
+
+    //Reviews
+    Route::post('/book/{id}/review',[BookReviewsController::class,'store'])->name('reviews.store');
 
 });
 require __DIR__ . '/auth.php';

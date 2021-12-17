@@ -1,6 +1,6 @@
 
 @if (session('message'))
-    <div {{ $attributes }} style="background:#aac986  " class="rounded p-3">
+    <div {{ $attributes }}  class="rounded p-3">
         <div class="font-medium text-green-600">
             {{ __('Success') }}
         </div>
