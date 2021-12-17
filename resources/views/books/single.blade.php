@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
     </x-slot>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+    <div class="py-12 ">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
+                <div class="p-6 bg-white border-b border-gray-200" >
                     <!-- component -->
                     <x-validation-errors class="mb-4" :errors="$errors"/>
 
@@ -13,7 +13,7 @@
                             @if($book->images()->count()>0)
                                 <img src="{{ asset('storage/' . $book->images()->first()->file_path) }}"
                                      alt=" Post image "
-                                     class=" w-1/2 h-full object-center object-cover group-hover:opacity-75"/>
+                                     class=" w-80 h-full object-center object-cover group-hover:opacity-75"/>
                             @else
                                 <img
 
@@ -40,27 +40,27 @@
                             </x-button>
                         </div>
                     </div>
+                    <x-success-message/>
                 </div>
                 <!-- Review -->
-                <x-success-message/>
-
                 <form method="POST" action="{{route('reviews.store',['id'=> $book->id]) }}"
                       class="w-full container align-middle ">
                     @csrf
                     <div class="mt-4 p-4 flex">
                         <x-label for="Review" :value="__('Review')" class="mx-2"/>
                         <x-input id="review" class=" mt-1 w-5/12 h-40 border" type="textarea" name="review"/>
-                        <div
-                            style="background:beige"
-                            class="h-40 w-2/4 mx-5 p-5 flex-col ">
+                        <div style="background:beige" class="h-40 w-2/4 mx-5 p-5 flex-col ">
+                            @if($book->count < 1)
                             @foreach($book->reviews($book->id)->get()->take(3) as $review)
                                 <div class="text-lg overflow-auto">
-{{--                                 {{\App\Models\User::find($book)}}  says:--}}
+                                    {{\App\Models\User::find($review->user_id)->name}} says:
                                 </div>
                                 <div>
                                     {{$review->comment}}
                                 </div>
                             @endforeach
+                                @else No reviews !
+                                @endif
                         </div>
                     </div>
                     <div class="p-4">
