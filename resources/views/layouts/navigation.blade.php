@@ -1,6 +1,4 @@
-<nav x-data="{ open: false }" class=" border-b border-gray-100"
-     style="background:url({{asset('/storage/background/Christmass-image.jpg')}})"
->
+<nav x-data="{ open: false }" class=" border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,7 +15,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                        <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
+                    <x-nav-link :href="route('users.list')" :active="request()->routeIs('users.list')">
                         {{ __('Users') }}
                     </x-nav-link>
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
@@ -48,7 +46,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -90,7 +88,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

@@ -19,7 +19,6 @@
             </div>
             <x-success-message/>
             <x-validation-errors class="mb-4" :errors="$errors"/>
-
             <div class="grid grid-cols-5 grid-flow-col  overflow-hidden">
                 <div class="grid grid-cols-1 gap-y-1 place-items-stretch h-5 w-45">
                     Price range:
@@ -53,12 +52,12 @@
                 </div>
                 <div
                     class="grid grid-cols-1 col-span-4 gap-y-4 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4">
-                    @if($books->count() > 1)
+                    @if($books->count() > 0)
                         @foreach($books as $book)
                             <a href="{{ route('books.show',$book ) }}" class="group border-2 p-2 bg-white rounded-lg ">
                                 <div
                                     class=" aspect-w-1 aspect-h-1  rounded-lg  overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                    @if($book->images()->count())
+                                    @if($book->images()->count() > 0 )
                                         <img src="{{ asset('storage/' . $book->images()->first()->file_path)}}"
                                              alt=" Post image "
                                              style="height: 200px;width: 100%"
@@ -69,7 +68,6 @@
                                             alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
                                             style="height: 200px;width: 100%"
                                             class="w-full h-60 object-center object-cover group-hover:opacity-75">
-
                                     @endif
                                 </div>
                                 <h3 class="mt-4 text-sm text-gray-700">
@@ -85,16 +83,12 @@
                                 </div>
                             </a>
                         @endforeach
-                    @else
-                        No books have been found !!
-                    @endif
                 </div>
-
-
             </div>
             <div class="p-4 items-end flex-1 ">
-                {{$books->links()}}
+                {{$books->withQueryString()->links()}}
             </div>
         </div>
     </div>
+
 </x-app-layout>

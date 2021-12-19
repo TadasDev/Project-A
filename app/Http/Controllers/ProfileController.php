@@ -13,6 +13,7 @@ class ProfileController extends Controller
     public function edit($id): View
     {
         $user = User::find($id);
+
         $this->authorize('update', $user);
 
         return view('users.edit', compact('user'));

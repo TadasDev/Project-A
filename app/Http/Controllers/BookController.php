@@ -32,6 +32,7 @@ class BookController extends Controller
 
         $books = Book::orderBy('created_at', 'desc')->paginate(12);
 
+
         return view('books.list', compact('books'));
     }
 
@@ -63,7 +64,6 @@ class BookController extends Controller
         if ($request->hasFile('images')) {
             $images = $request->file('images');
             foreach ($images as $image) {
-
                 $path = $image->storePublicly('images', 'public');
                 $book->images()->create([
                     'file_path' => $path

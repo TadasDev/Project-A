@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_admin' => true
+            'is_admin'=> 1
         ]);
 
         event(new Registered($user));
@@ -53,11 +53,6 @@ class RegisteredUserController extends Controller
         return redirect(RouteServiceProvider::HOME);
     }
 
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
     public function showUsers()
     {
 
@@ -65,4 +60,5 @@ class RegisteredUserController extends Controller
 
         return view('users.list', compact('users'));
     }
+
 }

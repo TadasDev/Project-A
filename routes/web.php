@@ -30,10 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/{id}/edit', [ProfileController::class, 'edit'])->name('users.edit');
     Route::post('/users/{id}/edit', [ProfileController::class, 'update'])->name('users.update');
     Route::delete('/users/{id}', [ProfileController::class, 'destroy'])->name('users.destroy');
-   //Books routes
+    //Books routes
     Route::resource('books', BookController::class);
     //Sort routes
-    Route::get('/sort', [BookController::class,'sortBy'])->name('books.sortBy');
+    Route::get('/sort-by/', [BookController::class,'sortBy'])->name('books.sortBy');
 
     //Reviews
     Route::post('/book/{id}/review',[BookReviewsController::class,'store'])->name('reviews.store');

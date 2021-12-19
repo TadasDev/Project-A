@@ -1,25 +1,20 @@
 <x-guest-layout>
-    <a href="{{ route('register') }}" class="ml-4 text-sm flex justify-end text-gray-700 dark:text-gray-500 underline">Register</a>
-
     <x-auth-card>
         <x-slot name="logo">
-
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
-
         </x-slot>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
-        <x-validation-errors class="mb-4" :errors="$errors" />
-
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-ww
+
             <!-- Email Address -->
             <div>
                 <x-label for="email" :value="__('Email')" />
@@ -58,5 +53,4 @@ ww
             </div>
         </form>
     </x-auth-card>
-
 </x-guest-layout>

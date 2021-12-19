@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const {theme} = require("./tailwind.config");
 
 module.exports = {
     purge: [
