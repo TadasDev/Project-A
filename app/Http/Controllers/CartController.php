@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
+use App\Services\CartManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    private $cartManager;
+
+    public function __construct(
+        CartManager  $cartManager
+    )
+    {
+        $this->cartManager =  $cartManager;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,59 +28,15 @@ class CartController extends Controller
      */
     public function index()
     {
-
-
         $cart = Session::get('cart');
         dd($cart);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
+    public function store($id)
     {
-        //
-    }
+        $this->cartManager->addToCart($id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return RedirectResponse
-     */
-    public function store($id): RedirectResponse
-    {
-
-        $book = Book::findorfail($id);
-
-        $cart = session()->get('cart');
-        // if cart is empty then this the first product
-        if (!$cart) {
-            $cart = [
-                $id => [
-                    "title" => $book->title,
-                    "quantity" => 1,
-                    "price" => $book->price,
-                ]
-            ];
-            session()->put('cart', $cart);
-
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
-        $cart[$id] = [
-            "name" => $book->title,
-            "quantity" => 1,
-            "price" => $book->price,
-        ];
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('message', 'Product added to cart successfully!');
 
     }
 
