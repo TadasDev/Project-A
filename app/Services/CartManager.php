@@ -8,6 +8,7 @@ class CartManager
 {
     public function addToCart($id)
     {
+
         $book = Book::findorfail($id);
 
         $cart = session()->get('cart');
@@ -15,9 +16,8 @@ class CartManager
         if (!$cart) {
             $cart = [
                 $id => [
-                    "title" => $book->title,
-                    "quantity" => 1,
-                    "price" => $book->price,
+                    'book' => $book,
+                    'quantity' => 1
                 ]
             ];
             session()->put('cart', $cart);
@@ -28,9 +28,8 @@ class CartManager
 
         } else {
             $cart[$id] = [
-                "name" => $book->title,
-                "quantity" => 1,
-                "price" => $book->price,
+                'book' => $book,
+                'quantity' => 1
             ];
             session()->put('cart', $cart);
         }

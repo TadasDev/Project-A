@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\CartManager;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,29 +15,30 @@ class CartController extends Controller
     private $cartManager;
 
     public function __construct(
-        CartManager  $cartManager
+        CartManager $cartManager
     )
     {
-        $this->cartManager =  $cartManager;
+        $this->cartManager = $cartManager;
     }
-
 
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function index()
     {
-        $cart = Session::get('cart');
-        dd($cart);
+
+        $items = Session::get('cart');
+
+        return view('cart.items', compact('items'));
     }
 
     public function store($id)
     {
         $this->cartManager->addToCart($id);
 
-        return redirect()->back()->with('message', 'Product added to cart successfully!');
+        return redirect()->back();
 
     }
 

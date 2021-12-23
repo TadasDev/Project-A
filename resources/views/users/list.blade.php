@@ -23,7 +23,6 @@
                             </tr>
                             @foreach($users as $user)
                                 <tr class="border-b hover:bg-orange-100 bg-gray-100">
-
                                     <td class="p-3 px-5">{{$user->name}}</td>
                                     <td class="p-3 px-5">{{$user->email}}</td>
                                     <td class="p-3 px-5"> {{$user->created_at}}</td>

@@ -80,15 +80,14 @@
                                 <p class="mt-1 text-lg font-medium text-gray-900">
                                     Price: ${{$book->price}}
                                 </p>
-                                <form method="POST" action="{{ route('cart.store',['id'=>$book->id])}}">
+                                <form method="POST" action="{{ route('cart.store',['id'=>$book->id])}}"
+                                class="flex justify-center"
+                                >
                                     @csrf
                                     <x-button>
                                         {{ __('Add to basket') }}
                                     </x-button>
-                                    </form>
-{{--                                <a  href="{{route('cart.store',['id'=>$book->id])}}">--}}
-
-{{--                                </a>--}}
+                                </form>
                             </div>
                 </div>
                 @endforeach
