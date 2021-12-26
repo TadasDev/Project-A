@@ -80,10 +80,16 @@ class CartController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return Response
+     * @return
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        //
+
+        $items = Session::get('cart');
+        dd($items[$id]);
+        Session::forget();
+
+        return redirect()->back();
+
     }
 }

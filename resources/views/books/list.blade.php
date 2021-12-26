@@ -81,8 +81,7 @@
                                     Price: ${{$book->price}}
                                 </p>
                                 <form method="POST" action="{{ route('cart.store',['id'=>$book->id])}}"
-                                class="flex justify-center"
-                                >
+                                      class="flex justify-center">
                                     @csrf
                                     <x-button>
                                         {{ __('Add to basket') }}
@@ -93,8 +92,6 @@
                 @endforeach
                 @endif
             </div>
-
-
         </div>
         <div class="p-4 items-end flex-1 ">
             {{$books->withQueryString()->links()}}
