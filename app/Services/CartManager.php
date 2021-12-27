@@ -6,6 +6,8 @@ use App\Models\Book;
 
 class CartManager
 {
+    protected $total = 0;
+
     public function addToCart($id)
     {
 
@@ -15,7 +17,7 @@ class CartManager
         // if cart is empty then this the first product
         if (!$cart) {
             $cart = [
-                $id => [
+               $id => [
                     'book' => $book,
                     'quantity' => 1
                 ]

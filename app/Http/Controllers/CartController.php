@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\CartManager;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
@@ -82,12 +81,12 @@ class CartController extends Controller
      * @param int $id
      * @return
      */
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
 
-        $items = Session::get('cart');
-        dd($items[$id]);
-        Session::forget();
+        $Oldcart = Session::get('cart');
+        unset($Oldcart[$id]);
+        session()->put('cart', $Oldcart);
 
         return redirect()->back();
 
