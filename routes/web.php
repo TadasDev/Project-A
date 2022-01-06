@@ -39,10 +39,13 @@ Route::middleware('auth')->group(function () {
     //Reviews routes
     Route::post('/book/{id}/review', [BookReviewsController::class, 'store'])->name('reviews.store');
     //Cart routes
-    Route::get('/cart-items/',[CartController::class,'index'])->name('cart.index');
+    Route::get('/cart-items/', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart-items/{id}', [CartController::class, 'show'])->name('cart.show');
 
-    Route::post('/cart-items/{id}',[CartController::class,'store'])->name('cart.store');
-    Route::delete('/cart-items/{id}',[CartController::class,'destroy'])->name('cart.destroy');
+    Route::post('/cart-items/{id}', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart-items/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+
 
 });
 require __DIR__ . '/auth.php';

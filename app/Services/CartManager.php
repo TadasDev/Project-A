@@ -3,10 +3,26 @@
 namespace App\Services;
 
 use App\Models\Book;
+use Illuminate\Support\Facades\Session;
 
 class CartManager
 {
-    protected $total = 0;
+
+    public function totalPrice()
+    {
+        $total = 0;
+
+        $cartItems = session()->get('cart');
+
+        foreach ($cartItems as $item) {
+            if ($item) {
+                $total += $item['book']->price * $item['quantity'];
+            } else
+                $total = 0;
+        }
+        session()->put('total', $total);
+
+    }
 
     public function addToCart($id)
     {
@@ -17,7 +33,7 @@ class CartManager
         // if cart is empty then this the first product
         if (!$cart) {
             $cart = [
-               $id => [
+                $id => [
                     'book' => $book,
                     'quantity' => 1
                 ]
@@ -35,5 +51,29 @@ class CartManager
             ];
             session()->put('cart', $cart);
         }
+
+    }
+
+    public function removePrice($id)
+    {
+
+        $cart = Session::get('cart');
+        $total = Session::get('total');
+
+        $price = $cart[$id]['book']->price;
+        $cartPrice = $total - $price;
+        if ($cartPrice < 0) {
+            $cartPrice = null;
+            session()->put('total', $cartPrice);
+        }
+        session()->put('total', $cartPrice);
+
+    }
+
+    public function removeItem($id)
+    {
+        $cart = Session::get('cart');
+        unset($cart[$id]);
+        session()->put('cart', $cart);
     }
 }

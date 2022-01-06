@@ -27,19 +27,21 @@
                                         <td class="p-5">
                                             <div
                                                 class=" rounded-lg  overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                                @if($item['book']->images()->count() > 0 )
-                                                    <img
-                                                        src="{{ asset('storage/' . $item['book']->images()->first()->file_path)}}"
-                                                        alt=" Post image "
-                                                        style="height: 100px;width: 100px"
-                                                        class="h-24 w-32 rounded-lg object-contain  group-hover:opacity-75"/>
-                                                @else
-                                                    <img
-                                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
-                                                        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
-                                                        style="height: 100px;width: 100px"
-                                                        class=" h-24 w-32 rounded-lg object-contain  group-hover:opacity-75">
-                                            @endif
+                                                <a href="{{ route('cart.show',$item['book']->id ) }}">
+                                                    @if($item['book']->images()->count() > 0 )
+                                                        <img
+                                                            src="{{ asset('storage/' . $item['book']->images()->first()->file_path)}}"
+                                                            alt=" Post image "
+                                                            style="height: 100px;width: 100px"
+                                                            class="h-24 w-32 rounded-lg object-contain  group-hover:opacity-75"/>
+                                                    @else
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                                                            alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                                                            style="height: 100px;width: 100px"
+                                                            class=" h-24 w-32 rounded-lg object-contain  group-hover:opacity-75">
+                                                    @endif
+                                                    <a>
                                         </td>
                                         <td class="p-5">{{$item['book']->title}}</td>
                                         <td class="p-5">${{$item['book']->price}}</td>
@@ -70,9 +72,15 @@
                             </table>
 
                     </div>
-                    <div class="flex justify-end text-xl align-bottom p-3">
-                        Total price: $25
-                    </div>
+                    @if(session()->get('total')>0)
+                        <div class="flex justify-end text-xl flex-wrap p-3">
+                            <div class="px-5">
+                                <x-button>Purchase</x-button>
+                            </div>
+                            ${{session()->get('total')}}
+                        </div>
+
+                    @endif
                 </div>
             </div>
         </div>

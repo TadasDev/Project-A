@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Services\CartManager;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
@@ -23,7 +26,7 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View|Response
      */
     public function index()
     {
@@ -33,9 +36,11 @@ class CartController extends Controller
         return view('cart.items', compact('items'));
     }
 
-    public function store($id)
+    public function store($id): RedirectResponse
     {
+
         $this->cartManager->addToCart($id);
+        $this->cartManager->totalPrice();
 
         return redirect()->back();
 
@@ -45,11 +50,13 @@ class CartController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return Application|Factory|\Illuminate\Contracts\View\View|Response
      */
     public function show($id)
     {
-        //
+        $book = Book::find($id);
+
+        return view('books.single', compact('book'));
     }
 
     /**
@@ -83,10 +90,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-
-        $Oldcart = Session::get('cart');
-        unset($Oldcart[$id]);
-        session()->put('cart', $Oldcart);
+        $this->cartManager->removePrice($id);
+        $this->cartManager->removeItem($id);
 
         return redirect()->back();
 
