@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+      return   $user->is_admin;
     }
 
     /**
@@ -64,7 +64,7 @@ class UserPolicy
      */
     public function delete(User $user, user $model)
     {
-        return $user->id === $model->id|| $user->is_admin;
+        return $user->id === $model->id || $user->is_admin;
     }
 
     /**

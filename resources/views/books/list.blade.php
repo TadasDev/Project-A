@@ -19,7 +19,7 @@
             </div>
             <x-success-message/>
             <x-validation-errors class="mb-4" :errors="$errors"/>
-            <div class="grid grid-cols-5 grid-flow-col  overflow-hidden">
+            <div class="grid grid-cols-5 grid-flow-col  bg-gray-100 p-5 rounded overflow-hidden">
                 <div class="grid grid-cols-1 gap-y-1 place-items-stretch h-5 w-45">
                     Price range:
                     <ul class="flex ">

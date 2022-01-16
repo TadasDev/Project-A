@@ -61,7 +61,9 @@ class CartManager
         $total = Session::get('total');
 
         $price = $cart[$id]['book']->price;
-        $cartPrice = $total - $price;
+        $quantity = $cart[$id]['quantity'];
+        $itemsPrice = $price * $quantity;
+        $cartPrice = $total - $itemsPrice;
         if ($cartPrice < 0) {
             $cartPrice = null;
             session()->put('total', $cartPrice);
@@ -74,6 +76,25 @@ class CartManager
     {
         $cart = Session::get('cart');
         unset($cart[$id]);
+        session()->put('cart', $cart);
+    }
+
+    public function addQuantity($id)
+    {
+        $cart = Session::get('cart');
+        $cart[$id]['quantity'] += 1;
+        session()->put('cart', $cart);
+    }
+
+    public function removeQuantity($id)
+    {
+
+        $cart = Session::get('cart');
+        $cart[$id]['quantity'] -= 1;
+//        if ($cart[$id]['quantity'] > 2) {
+//            $cart[$id]['quantity'] = 1;
+//        }
+
         session()->put('cart', $cart);
     }
 }

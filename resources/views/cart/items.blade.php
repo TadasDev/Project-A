@@ -46,9 +46,18 @@
                                         <td class="p-5">{{$item['book']->title}}</td>
                                         <td class="p-5">${{$item['book']->price}}</td>
                                         <td class="p-5">
-                                            <button class="border p-1 m-2 rounded-lg">-</button>
+                                            <a href="{{route('cart.addQuantity',['id'=>$item['book']->id])}}">
+                                                <button class="border p-1 m-2 rounded-lg">
+                                                    +
+                                                </button>
+                                            </a>
                                             {{$item['quantity']}}
-                                            <button class="border p-1 m-2 rounded-lg">+</button>
+{{--                                            <a href="{{route('cart.removeQuantity',['id'=>$item['book']->id])}}">--}}
+                                                <button class="border p-1 m-2 rounded-lg">
+                                                    -
+                                                </button>
+{{--                                            </a>--}}
+
                                         </td>
                                         <td class="p-5">
                                             <form method="POST"

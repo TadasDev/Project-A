@@ -59,36 +59,21 @@ class CartController extends Controller
         return view('books.single', compact('book'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
+
+    public function removeQuantity($id): RedirectResponse
     {
-        //
+        $this->cartManager->removeQuantity($id);
+        return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
+    public function addQuantity($id): RedirectResponse
     {
-        //
+        $this->cartManager->addQuantity($id);
+        return redirect()->back();
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return
-     */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $this->cartManager->removePrice($id);
         $this->cartManager->removeItem($id);

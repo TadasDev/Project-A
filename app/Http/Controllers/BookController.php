@@ -32,7 +32,6 @@ class BookController extends Controller
 
         $books = Book::orderBy('created_at', 'desc')->paginate(12);
 
-
         return view('books.list', compact('books'));
     }
 
