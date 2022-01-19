@@ -30,9 +30,7 @@ class CartController extends Controller
      */
     public function index()
     {
-
         $items = Session::get('cart');
-
         return view('cart.items', compact('items'));
     }
 
@@ -40,8 +38,6 @@ class CartController extends Controller
     {
 
         $this->cartManager->addToCart($id);
-        $this->cartManager->totalPrice();
-
         return redirect()->back();
 
     }
@@ -75,9 +71,7 @@ class CartController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $this->cartManager->removePrice($id);
         $this->cartManager->removeItem($id);
-
         return redirect()->back();
 
     }

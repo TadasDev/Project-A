@@ -40,8 +40,8 @@
                                                             alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
                                                             style="height: 100px;width: 100px"
                                                             class=" h-24 w-32 rounded-lg object-contain  group-hover:opacity-75">
-                                                    @endif
-                                                    <a>
+                                                @endif
+                                            </div>
                                         </td>
                                         <td class="p-5">{{$item['book']->title}}</td>
                                         <td class="p-5">${{$item['book']->price}}</td>
@@ -52,11 +52,11 @@
                                                 </button>
                                             </a>
                                             {{$item['quantity']}}
-{{--                                            <a href="{{route('cart.removeQuantity',['id'=>$item['book']->id])}}">--}}
+                                            <a href="{{route('cart.removeQuantity',['id'=>$item['book']->id])}}">
                                                 <button class="border p-1 m-2 rounded-lg">
                                                     -
                                                 </button>
-{{--                                            </a>--}}
+                                            </a>
 
                                         </td>
                                         <td class="p-5">

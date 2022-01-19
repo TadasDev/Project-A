@@ -114,11 +114,14 @@ class BookController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        Book::destroy($id);
+
+        return redirect()->back()->with('message', 'Book Removed');
+
     }
 
     public function sortBy(SortRequest $request)

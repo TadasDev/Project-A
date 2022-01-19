@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookReviewsController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 //Auth routes
 Route::middleware('auth')->group(function () {
@@ -41,11 +39,13 @@ Route::middleware('auth')->group(function () {
     //Cart routes
     Route::get('/cart-items/', [CartController::class, 'index'])->name('cart.index');
     Route::get('/cart-items/{id}', [CartController::class, 'show'])->name('cart.show');
-
     Route::post('/cart-items/{id}', [CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart-items/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-    Route::get('/cart-item/{id}', [CartController::class, 'addQuantity'])->name('cart.addQuantity');
-//    Route::delete('/cart-item/{id}', [CartController::class, 'removeQuantity'])->name('cart.removeQuantity');
+
+    Route::get('/cart-items/add/{id}', [CartController::class, 'addQuantity'])->name('cart.addQuantity');
+    Route::get('/cart-item/remove/{id}', [CartController::class, 'removeQuantity'])->name('cart.removeQuantity');
+
+    Route::get('/my-books',[DashboardController::class,'index'])->name('dashboard.index');
 
 });
 require __DIR__ . '/auth.php';

@@ -50,6 +50,8 @@ class CartManager
                 'quantity' => 1
             ];
             session()->put('cart', $cart);
+
+            $this->totalPrice();
         }
 
     }
@@ -76,7 +78,10 @@ class CartManager
     {
         $cart = Session::get('cart');
         unset($cart[$id]);
+        $this->removePrice($id);
+
         session()->put('cart', $cart);
+
     }
 
     public function addQuantity($id)
@@ -84,6 +89,8 @@ class CartManager
         $cart = Session::get('cart');
         $cart[$id]['quantity'] += 1;
         session()->put('cart', $cart);
+
+        $this->totalPrice();
     }
 
     public function removeQuantity($id)
@@ -91,10 +98,12 @@ class CartManager
 
         $cart = Session::get('cart');
         $cart[$id]['quantity'] -= 1;
-//        if ($cart[$id]['quantity'] > 2) {
-//            $cart[$id]['quantity'] = 1;
-//        }
+        if ($cart[$id]['quantity'] < 2) {
+            $cart[$id]['quantity'] = 1;
+        }
 
         session()->put('cart', $cart);
+
+        $this->totalPrice();
     }
 }
