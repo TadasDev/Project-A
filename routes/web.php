@@ -45,7 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart-items/add/{id}', [CartController::class, 'addQuantity'])->name('cart.addQuantity');
     Route::get('/cart-item/remove/{id}', [CartController::class, 'removeQuantity'])->name('cart.removeQuantity');
 
-    Route::get('/my-books',[DashboardController::class,'index'])->name('dashboard.index');
+//    Route::get('/my-books',[DashboardController::class,'index'])->name('dashboard.index');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 
 });
 require __DIR__ . '/auth.php';
